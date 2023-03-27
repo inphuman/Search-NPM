@@ -65,9 +65,11 @@ export default {
         ...mapActions(["fetchPackages"]),
         ...mapMutations(["setOffset", "setCurrentPage", "setPackageModal"]),
         changePage(page) {
-            this.setCurrentPage(page);
-            this.setOffset();
-            this.fetchPackages();
+            if(!this.loading && this.currentPage != page) {
+                this.setCurrentPage(page);
+                this.setOffset();
+                this.fetchPackages();
+            }
         },
         showPackageModal(item) {
             this.setPackageModal({
